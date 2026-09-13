@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Eventshub.Api/Eventshub.Api.csproj" />
+    <Project Path="src/Eventshub.Application/Eventshub.Application.csproj" />
+    <Project Path="src/Eventshub.Domain/Eventshub.Domain.csproj" />
+    <Project Path="src/Eventshub.Persistence/Eventshub.Persistence.csproj" />
+  </Folder>
+</Solution>

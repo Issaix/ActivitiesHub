@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Persistence;
+using Eventshub.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

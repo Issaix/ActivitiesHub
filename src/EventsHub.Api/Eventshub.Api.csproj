@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eventshub.Application\Eventshub.Application.csproj" />
+    <ProjectReference Include="..\EventsHub.Application\EventsHub.Application.csproj" />
   </ItemGroup>
 
 </Project>

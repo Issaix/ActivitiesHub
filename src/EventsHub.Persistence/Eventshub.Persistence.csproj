@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventsHub.Domain\Eventshub.Domain.csproj" />
+    <ProjectReference Include="..\EventsHub.Domain\EventsHub.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

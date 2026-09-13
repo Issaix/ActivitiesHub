@@ -1,6 +1,6 @@
-using Eventshub.Domain;
+using EventsHub.Domain;
 
-namespace Eventshub.Persistence;
+namespace EventsHub.Persistence;
 public static class DbInitializer
 {
      public static async Task SeedDataAsync(AppDbContext context)

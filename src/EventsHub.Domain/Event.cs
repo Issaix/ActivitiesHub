@@ -1,4 +1,4 @@
-namespace Eventshub.Domain;
+namespace EventsHub.Domain;
 
 public class Event
 {

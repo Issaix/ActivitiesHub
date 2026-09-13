@@ -1,7 +1,7 @@
-using Eventshub.Domain;
+using EventsHub.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eventshub.
+namespace EventsHub.
 Persistence
 {
     public class AppDbContext(DbContextOptions options) : DbContext(options)

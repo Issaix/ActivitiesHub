@@ -7,7 +7,7 @@ namespace EventsHub.Api.Controllers;
 public class EventsController(AppDbContext context) : EventsHubBaseController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Event>>> GetEventAsync()
+    public async Task<ActionResult<IReadOnlyList<Event>>> GetEventsAsync()
     {
         return await context.Events.ToListAsync();
     }

@@ -1,78 +1,96 @@
-# React + TypeScript + Vite
+# EventsHub frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The React frontend for EventsHub fetches events from the ASP.NET Core API and
+displays their titles in a Material UI list. It uses TypeScript, Vite, Axios,
+Emotion, and Roboto fonts. The React Compiler is enabled through the Babel
+preset in `vite.config.ts`.
 
-Currently, two official plugins are available:
+For backend setup and the full component flow, see the
+[project README](../README.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run locally
 
-## React Compiler
+Use Node.js `^20.19.0` or `>=22.12.0` and npm, matching the locked Vite
+package's engine requirement.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Start the API from the repository root in a separate terminal:
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```powershell
+dotnet dev-certs https --trust
+dotnet run --project src/EventsHub.Api/Eventshub.Api.csproj --launch-profile https
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Then run these commands from `web/`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```powershell
+npm ci
+npm run dev
 ```
+
+Open the local URL printed by Vite, normally `https://localhost:3000`. Vite
+uses `vite-plugin-mkcert` to create a trusted development certificate. Its
+first run may need network access and permission to install the local
+certificate authority.
+
+## How the frontend connects to the API
+
+1. `src/main.tsx` mounts `App` inside React `StrictMode`, imports the global
+   styles, and loads the Roboto font weights.
+2. `src/App.tsx` sends an Axios GET request to
+   `https://localhost:5001/api/v1/events` when the component mounts.
+3. The API's `EventsController` dispatches `GetEventList.Query` through
+   MediatR; its handler reads events from SQLite through `AppDbContext`.
+4. The response is stored in the `activities` state and rendered through
+   Material UI `List`, `ListItem`, and `ListItemText` components.
+
+The request URL is hardcoded in `src/App.tsx`. There is currently no API URL
+configuration through environment variables and no Vite API proxy. If the
+backend address changes, update the Axios URL there.
+
+The API permits CORS requests from `http://localhost:3000` and
+`https://localhost:3000`. If Vite starts on another port, stop the process using
+port 3000 or update the API's allowed origins in
+`../src/EventsHub.Api/Program.cs` to match.
+
+## Source layout
+
+| File | Purpose |
+| --- | --- |
+| `src/main.tsx` | React entry point, StrictMode, global styles, and fonts |
+| `src/App.tsx` | Fetches the event list and renders event titles |
+| `src/lib/types/index.d.ts` | Global `Activity` response type |
+| `src/index.css` | Global page styles |
+| `src/App.css` | Existing component stylesheet; currently not imported by `App` |
+| `vite.config.ts` | Development port, React plugin, React Compiler, and mkcert |
+| `eslint.config.js` | JavaScript, TypeScript, React Hooks, and React Refresh lint rules |
+
+## Scripts
+
+Run these commands from `web/`:
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server on port 3000 |
+| `npm run lint` | Run ESLint |
+| `npm run build` | Run TypeScript project checks and build into `dist/` |
+| `npm run preview` | Serve the built frontend locally after a build |
+
+Use the URL printed by `npm run preview`. It may use a different port from
+the development server, so calling the API from that origin requires a
+matching API CORS configuration. The built app retains the hardcoded localhost
+API URL and needs an appropriate API address before deployment.
+
+## Current behavior and troubleshooting
+
+- The UI lists event titles. Event details, create/edit/delete controls, loading
+  indicators, and request error messages have not been added yet.
+- `Activity` declares numeric `latitude` and `longitude`, but the backend
+  `Event` model returns strings. Axios's TypeScript type argument does not
+  convert those values; align the type with the contract or explicitly parse
+  coordinates before using them as numbers.
+- If the list is empty, verify the API is running and inspect the browser's
+  Network panel for the `/api/v1/events` request. A connection failure, an
+  untrusted API certificate, or a CORS mismatch can prevent the data from
+  loading. Open `https://localhost:5001/api/v1/events` directly to check the API.
+- React StrictMode can run the mount effect twice during development, which
+  can produce two GET requests.

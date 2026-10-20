@@ -1,13 +1,20 @@
-import { CssBaseline, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
-    axios.get<Activity[]>('https://localhost:5001/api/v1/events')
+    axios
+      .get<Activity[]>("https://localhost:5001/api/v1/events")
       .then((response) => setActivities(response.data));
 
     return () => {};
@@ -16,16 +23,18 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <NavBar/>
-      <List>
+      <NavBar />
+      <Container maxWidth="xl" sx={{ mt: 3 }}>
+        <List>
           {activities.map((activity: Activity) => (
             <ListItem key={activity.id}>
               <ListItemText>{activity.title}</ListItemText>
             </ListItem>
           ))}
-      </List>
+        </List>
+      </Container>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

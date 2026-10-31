@@ -6,19 +6,19 @@ events; the current frontend displays event titles fetched from the API.
 
 ## Repository layout
 
-| Path | Purpose |
-| --- | --- |
-| `src/EventsHub.Api/` | HTTP controllers, dependency registration, CORS, and database startup |
-| `src/EventsHub.Application/` | MediatR queries and commands; AutoMapper configuration |
-| `src/EventsHub.Domain/` | The `Event` entity |
-| `src/EventsHub.Persistence/` | EF Core `AppDbContext`, SQLite migrations, and sample data |
-| `src/EventsHub.OpenApi/` | Separate NSwag documentation host that discovers the API controllers |
-| `src/openapi/EventsHub.v1.json` | Checked-in OpenAPI snapshot |
-| `src/nswag/EventsHub.nswag` | C# client generation configuration |
-| `src/src/EventsHub.OpenApi/Generated/` | Current generated C# client output |
-| `web/` | React, TypeScript, Vite, Material UI, and Axios frontend |
-| `tests/EventsHub.UnitTests/` | NUnit controller tests with SQLite setup |
-| `tests/EventsHub.IntegrationTests/` | Bruno HTTP request collection |
+| Path                                   | Purpose                                                               |
+| -------------------------------------- | --------------------------------------------------------------------- |
+| `src/EventsHub.Api/`                   | HTTP controllers, dependency registration, CORS, and database startup |
+| `src/EventsHub.Application/`           | MediatR queries and commands; AutoMapper configuration                |
+| `src/EventsHub.Domain/`                | The `Event` entity                                                    |
+| `src/EventsHub.Persistence/`           | EF Core `AppDbContext`, SQLite migrations, and sample data            |
+| `src/EventsHub.OpenApi/`               | Separate NSwag documentation host that discovers the API controllers  |
+| `src/openapi/EventsHub.v1.json`        | Checked-in OpenAPI snapshot                                           |
+| `src/nswag/EventsHub.nswag`            | C# client generation configuration                                    |
+| `src/src/EventsHub.OpenApi/Generated/` | Current generated C# client output                                    |
+| `web/`                                 | React, TypeScript, Vite, Material UI, and Axios frontend              |
+| `tests/EventsHub.UnitTests/`           | NUnit controller tests with SQLite setup                              |
+| `tests/EventsHub.IntegrationTests/`    | Bruno HTTP request collection                                         |
 
 ## How the components connect
 
@@ -92,14 +92,14 @@ connection troubleshooting.
 Routes below are relative to `https://localhost:5001`. `POST` and `PUT` accept
 an `Event` JSON body; `PUT` identifies the event through its body `id`.
 
-| Method | Route | Successful response |
-| --- | --- | --- |
-| GET | `/api/v1/events` | `200` with the event array |
-| GET | `/api/v1/events/{id}` | `200` with one event |
-| POST | `/api/v1/events` | `200` with the created event ID |
-| PUT | `/api/v1/events` | `204` with no body |
-| DELETE | `/api/v1/events/{id}` | `200` with no body |
-| GET | `/api/v1/weatherforecast` | `200` with sample weather forecasts |
+| Method | Route                     | Successful response                 |
+| ------ | ------------------------- | ----------------------------------- |
+| GET    | `/api/v1/events`          | `200` with the event array          |
+| GET    | `/api/v1/events/{id}`     | `200` with one event                |
+| POST   | `/api/v1/events`          | `200` with the created event ID     |
+| PUT    | `/api/v1/events`          | `204` with no body                  |
+| DELETE | `/api/v1/events/{id}`     | `200` with no body                  |
+| GET    | `/api/v1/weatherforecast` | `200` with sample weather forecasts |
 
 An example create body:
 

@@ -54,26 +54,26 @@ port 3000 or update the API's allowed origins in
 
 ## Source layout
 
-| File | Purpose |
-| --- | --- |
-| `src/main.tsx` | React entry point, StrictMode, global styles, and fonts |
-| `src/App.tsx` | Fetches the event list and renders event titles |
-| `src/lib/types/index.d.ts` | Global `Activity` response type |
-| `src/index.css` | Global page styles |
-| `src/App.css` | Existing component stylesheet; currently not imported by `App` |
-| `vite.config.ts` | Development port, React plugin, React Compiler, and mkcert |
-| `eslint.config.js` | JavaScript, TypeScript, React Hooks, and React Refresh lint rules |
+| File                       | Purpose                                                           |
+| -------------------------- | ----------------------------------------------------------------- |
+| `src/main.tsx`             | React entry point, StrictMode, global styles, and fonts           |
+| `src/App.tsx`              | Fetches the event list and renders event titles                   |
+| `src/lib/types/index.d.ts` | Global `Activity` response type                                   |
+| `src/index.css`            | Global page styles                                                |
+| `src/App.css`              | Existing component stylesheet; currently not imported by `App`    |
+| `vite.config.ts`           | Development port, React plugin, React Compiler, and mkcert        |
+| `eslint.config.js`         | JavaScript, TypeScript, React Hooks, and React Refresh lint rules |
 
 ## Scripts
 
 Run these commands from `web/`:
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Vite development server on port 3000 |
-| `npm run lint` | Run ESLint |
-| `npm run build` | Run TypeScript project checks and build into `dist/` |
-| `npm run preview` | Serve the built frontend locally after a build |
+| Command           | Purpose                                              |
+| ----------------- | ---------------------------------------------------- |
+| `npm run dev`     | Start the Vite development server on port 3000       |
+| `npm run lint`    | Run ESLint                                           |
+| `npm run build`   | Run TypeScript project checks and build into `dist/` |
+| `npm run preview` | Serve the built frontend locally after a build       |
 
 Use the URL printed by `npm run preview`. It may use a different port from
 the development server, so calling the API from that origin requires a

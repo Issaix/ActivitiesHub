@@ -1,33 +1,60 @@
-import { Group } from "@mui/icons-material";
-import { Box, AppBar, Toolbar, Typography, Button, Container, MenuItem, MenuList } from "@mui/material";
+import { Group } from '@mui/icons-material'
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Container,
+  MenuItem,
+  MenuList,
+} from '@mui/material'
 
 type Props = {
-  openForm: () => void;
-};
+  openForm: () => void
+}
 
 export default function NavBar({ openForm }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"
-        sx={{ backgroundImage: "linear-gradient(90deg, #183D3B 0%, #146B70 100%)" }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundImage: 'linear-gradient(90deg, #183D3B 0%, #146B70 100%)',
+        }}
+      >
         <Container maxWidth="xl">
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <MenuList>
-              <MenuItem sx={{ display: "flex", gap: 2 }}>
+              <MenuItem sx={{ display: 'flex', gap: 2 }}>
                 <Group fontSize="large" />
-                <Typography variant="h4" sx={{ fontWeight: "bold" }}>Activities</Typography>
+                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+                  Activities
+                </Typography>
               </MenuItem>
             </MenuList>
-            <MenuList disablePadding sx={{display: "flex"}}>
-              <MenuItem sx={{ fontSize: "1.2rem", textTransform: "uppercase"}}>Activities</MenuItem>
-              <MenuItem sx={{ fontSize: "1.2rem", textTransform: "uppercase"}}>About</MenuItem>
-              <MenuItem sx={{ fontSize: "1.2rem", textTransform: "uppercase"}}>Contact</MenuItem>
+            <MenuList disablePadding sx={{ display: 'flex' }}>
+              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                Activities
+              </MenuItem>
+              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                About
+              </MenuItem>
+              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                Contact
+              </MenuItem>
             </MenuList>
-            <Button onClick={openForm} size="large" variant="contained" color="warning">Create activity</Button>
+            <Button
+              onClick={openForm}
+              size="large"
+              variant="contained"
+              color="warning"
+            >
+              Create activity
+            </Button>
           </Toolbar>
         </Container>
       </AppBar>
     </Box>
   )
 }
- 

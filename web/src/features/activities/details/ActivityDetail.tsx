@@ -5,13 +5,13 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from "@mui/material";
+} from '@mui/material'
 
 type Props = {
-  activity: Activity;
-  cancelSelectActivity: () => void;
-  openForm: (id: string) => void;
-};
+  activity: Activity
+  cancelSelectActivity: () => void
+  openForm: (id: string) => void
+}
 
 export default function ActivityDetail({
   activity,
@@ -26,7 +26,7 @@ export default function ActivityDetail({
       />
       <CardContent>
         <Typography variant="h5">{activity.title}</Typography>
-        <Typography variant="subtitle1" sx={{ fontWeight: "light" }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 'light' }}>
           {activity.date}
         </Typography>
         <Typography variant="body1">{activity.description}</Typography>
@@ -40,5 +40,5 @@ export default function ActivityDetail({
         </Button>
       </CardActions>
     </Card>
-  );
+  )
 }

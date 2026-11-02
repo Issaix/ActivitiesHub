@@ -8,8 +8,11 @@ http:
   url: "{{baseUrl}}/events/:eventId"
   params:
     - name: eventId
-      value: 44de1c97-d184-42a7-8922-68ba0183a8a4
+      value: 0ae78c6a-73d5-43a6-9f5f-6056ccc0da6f
       type: path
+  body:
+    type: json
+    data: ""
   auth: inherit
 
 runtime:
@@ -25,3 +28,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

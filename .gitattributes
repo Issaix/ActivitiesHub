@@ -1,0 +1,3 @@
+graphify-out/graph.json merge=graphify
+
+web/** text=auto eol=lf

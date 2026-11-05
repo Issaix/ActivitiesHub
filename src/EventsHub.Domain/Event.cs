@@ -18,7 +18,7 @@ public class Event
 
     public required string Venue { get; set; }
 
-    public required string Latitude { get; set; }
+    public string Latitude { get; set; } = string.Empty;
 
-    public required string Longitude { get; set; }
+    public string Longitude { get; set; } = string.Empty;
 }

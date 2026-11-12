@@ -11,10 +11,9 @@ import { useActivities } from '../../../lib/hooks/useActivities'
 
 type Props = {
   activity: Activity
-  selectActivity: (id: string) => void
 }
 
-export default function ActivityCard({ activity, selectActivity }: Props) {
+export default function ActivityCard({ activity }: Props) {
   const { deleteActivity } = useActivities()
   return (
     <Card sx={{ borderRadius: 3 }}>
@@ -42,11 +41,7 @@ export default function ActivityCard({ activity, selectActivity }: Props) {
           >
             Delete
           </Button>
-          <Button
-            onClick={() => selectActivity(activity.id)}
-            size="medium"
-            variant="contained"
-          >
+          <Button onClick={() => {}} size="medium" variant="contained">
             View
           </Button>
         </Box>
